@@ -1,0 +1,12 @@
+{
+  "name": "28周身材皮肤执行计划",
+  "short_name": "身材皮肤计划",
+  "description": "每日训练、护肤、金茉28周、补剂和购买清单。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7f4",
+  "theme_color": "#3f6249",
+  "orientation": "portrait-primary"
+}

@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>28周身材皮肤执行计划</title>
+  <style>
+    :root {
+      --bg: #f6f7f4;
+      --ink: #20231f;
+      --muted: #687067;
+      --line: #d9ded3;
+      --panel: #ffffff;
+      --sage: #6d8a72;
+      --sage-dark: #3f6249;
+      --clay: #bb7258;
+      --amber: #d8a246;
+      --sky: #4c8199;
+      --rose: #b96e78;
+      --shadow: 0 18px 45px rgba(32, 35, 31, .08);
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(120deg, rgba(109, 138, 114, .15), transparent 36%),
+        linear-gradient(300deg, rgba(216, 162, 70, .18), transparent 32%),
+        var(--bg);
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    button, input { font: inherit; }
+
+    .shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .headline, .today-card, .panel, .metric, .day-card, .month-card, .shop-card, .notice-card, .jinmo-card {
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+    }
+
+    .headline {
+      padding: 28px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      color: var(--sage-dark);
+      font-weight: 700;
+      margin: 0 0 12px;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 38px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .sub {
+      color: var(--muted);
+      max-width: 680px;
+      line-height: 1.8;
+      margin: 16px 0 0;
+    }
+
+    .hero-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #eef2ea;
+      color: var(--sage-dark);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .today-card {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .date-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .date-row input {
+      width: 150px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 10px;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .today-title {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.25;
+    }
+
+    .progress-bar {
+      height: 10px;
+      background: #e6e9e1;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--sage), var(--amber));
+      border-radius: inherit;
+    }
+
+    .quick-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .quick-list li {
+      border-left: 4px solid var(--sage);
+      background: #f8faf6;
+      padding: 10px 12px;
+      border-radius: 6px;
+      line-height: 1.5;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .metric {
+      padding: 16px;
+      min-height: 104px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .metric strong {
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 10px 0;
+      background: rgba(246, 247, 244, .92);
+      backdrop-filter: blur(12px);
+    }
+
+    .tab-button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      min-height: 42px;
+      font-weight: 700;
+    }
+
+    .tab-button.active {
+      background: var(--sage-dark);
+      border-color: var(--sage-dark);
+      color: #fff;
+    }
+
+    .panel {
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+    }
+
+    .panel h3 {
+      margin: 20px 0 10px;
+      font-size: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .task-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fbfcfa;
+      min-height: 132px;
+    }
+
+    .task-box h3, .day-card h3, .month-card h3, .shop-card h3, .notice-card h3, .jinmo-card h3 {
+      margin-top: 0;
+    }
+
+    .task-box ul, .day-card ul, .month-card ul, .shop-card ul, .notice-card ul, .jinmo-card ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.75;
+    }
+
+    .day-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .day-card {
+      padding: 14px;
+      min-height: 360px;
+      box-shadow: none;
+    }
+
+    .day-card.today, .jinmo-card.active {
+      border-color: var(--clay);
+      outline: 3px solid rgba(187, 114, 88, .18);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      margin-bottom: 9px;
+      border-radius: 999px;
+      background: #f1eee8;
+      color: var(--clay);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .month-grid, .shop-grid, .notice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .jinmo-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .month-card, .shop-card, .notice-card, .jinmo-card {
+      padding: 16px;
+      box-shadow: none;
+      background: #fbfcfa;
+    }
+
+    .month-card.active {
+      border-color: var(--sage-dark);
+      outline: 3px solid rgba(109, 138, 114, .18);
+    }
+
+    .accent-sage { border-left: 5px solid var(--sage); }
+    .accent-clay { border-left: 5px solid var(--clay); }
+    .accent-sky { border-left: 5px solid var(--sky); }
+    .accent-amber { border-left: 5px solid var(--amber); }
+    .accent-rose { border-left: 5px solid var(--rose); }
+
+    .routine {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .routine .task-box { min-height: 170px; }
+
+    .section-note {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 0 12px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 16px 0 0;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1120px) {
+      .day-grid, .jinmo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero, .grid-2, .month-grid, .shop-grid, .notice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+
+      .routine {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell { padding: 14px; }
+      .headline, .today-card, .panel { padding: 18px; }
+      h1 { font-size: 30px; }
+      .metrics, .day-grid, .routine, .jinmo-grid { grid-template-columns: 1fr; }
+      .date-row { align-items: flex-start; flex-direction: column; }
+      .date-row input { width: 100%; }
+      .tabs { position: static; }
+      .tab-button { flex: 1 1 calc(50% - 8px); }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="headline">
+        <div>
+          <p class="eyebrow">2026-06-11 起始 · 28周执行表</p>
+          <h1>身材、皮肤、发际线一张图执行</h1>
+          <p class="sub">目标是把体脂从16%-18%降到13%-15%，让胸肩更明显、腰腹更干净，同时降低晨起水肿，改善毛孔、闭口和肤色暗沉。页面离线可用，不记录打卡。</p>
+        </div>
+        <div class="hero-bottom">
+          <span class="tag">普通健身房/居家双方案</span>
+          <span class="tag">不安排腿部主训练</span>
+          <span class="tag">金茉28周</span>
+          <span class="tag">120g蛋白/天</span>
+          <span class="tag">历史版本 2026-06-13</span>
+        </div>
+      </div>
+
+      <aside class="today-card">
+        <div class="date-row">
+          <div>
+            <p class="eyebrow">今日视图</p>
+            <h2 class="today-title" id="todayTitle">加载中</h2>
+          </div>
+          <input id="datePicker" type="date" aria-label="选择查看日期">
+        </div>
+        <div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+          <p class="footer-note" id="progressText">计算进度中</p>
+        </div>
+        <ul class="quick-list" id="todayQuickList"></ul>
+      </aside>
+    </section>
+
+    <section class="metrics">
+      <div class="metric"><span>体脂</span><strong>16%-18% → 13%-15%</strong></div>
+      <div class="metric"><span>腰腹</span><strong>游泳圈减少60%-70%</strong></div>
+      <div class="metric"><span>面部</span><strong>晨起水肿减少60%以上</strong></div>
+      <div class="metric"><span>皮肤</span><strong>毛孔、闭口、肤色均匀</strong></div>
+    </section>
+
+    <nav class="tabs" aria-label="计划标签">
+      <button class="tab-button active" data-tab="daily">每日视图</button>
+      <button class="tab-button" data-tab="weekly">周计划</button>
+      <button class="tab-button" data-tab="months">6个月阶段</button>
+      <button class="tab-button" data-tab="jinmo">金茉28周</button>
+      <button class="tab-button" data-tab="shopping">购买清单</button>
+      <button class="tab-button" data-tab="notes">注意事项</button>
+    </nav>
+
+    <section class="panel tab-panel" id="daily">
+      <h2>今天要做什么</h2>
+      <div class="grid-2">
+        <div class="task-box accent-sage">
+          <h3>能去健身房</h3>
+          <ul id="dailyGym"></ul>
+        </div>
+        <div class="task-box accent-amber">
+          <h3>不能去健身房</h3>
+          <ul id="dailyHome"></ul>
+        </div>
+        <div class="task-box accent-clay">
+          <h3>本周金茉</h3>
+          <ul id="dailyJinmo"></ul>
+        </div>
+        <div class="task-box accent-sky">
+          <h3>晚护肤</h3>
+          <ul id="dailySkincare"></ul>
+        </div>
+      </div>
+      <div class="routine">
+        <div class="task-box">
+          <h3>起床消肿</h3>
+          <ul>
+            <li>温水500ml。</li>
+            <li>黑咖啡。</li>
+            <li>快走15分钟，周日可30分钟。</li>
+          </ul>
+        </div>
+        <div class="task-box">
+          <h3>早餐后补剂</h3>
+          <ul>
+            <li>Swisse VC：1片，早餐后。</li>
+            <li>Swisse 葡萄籽：1片，早餐后。</li>
+            <li>维生素D3：600-1000 IU/天，早餐或午餐后随餐。</li>
+            <li>鱼油：1粒，午餐或晚餐后随餐。</li>
+          </ul>
+        </div>
+        <div class="task-box">
+          <h3>早护肤</h3>
+          <ul>
+            <li>温和洁面。</li>
+            <li>SK-II 神仙水。</li>
+            <li>早：Olay 小白瓶。</li>
+            <li>早：理肤泉或同级防晒。</li>
+          </ul>
+        </div>
+        <div class="task-box">
+          <h3>饮食底线</h3>
+          <ul>
+            <li>蛋白质约120g/天。</li>
+            <li>HIIT或力量训练日不要完全断碳。</li>
+            <li>21点后不大量喝水，22点后不进食。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel tab-panel" id="weekly" hidden>
+      <h2>每周计划</h2>
+      <p class="section-note">每天都给两套方案：能去普通健身房时做器械版；不能去时做居家版。不安排腿部主训练。</p>
+      <div class="day-grid" id="weekGrid"></div>
+    </section>
+
+    <section class="panel tab-panel" id="months" hidden>
+      <h2>6个月阶段</h2>
+      <div class="month-grid" id="monthGrid"></div>
+    </section>
+
+    <section class="panel tab-panel" id="jinmo" hidden>
+      <h2>金茉水光仪28周</h2>
+      <p class="section-note">固定周六使用。若当天做HIIT，晚上金茉护肤仍禁阿达帕林和双萃；如与光子/水光术后冲突，以修护和医生医嘱优先。</p>
+      <div class="metrics">
+        <div class="metric"><span>0号</span><strong>6组，用完</strong></div>
+        <div class="metric"><span>3号</span><strong>4组，用完</strong></div>
+        <div class="metric"><span>4号</span><strong>10组，用完</strong></div>
+        <div class="metric"><span>5号</span><strong>8组，用完</strong></div>
+      </div>
+      <div id="jinmoGrid"></div>
+    </section>
+
+    <section class="panel tab-panel" id="shopping" hidden>
+      <h2>购买清单</h2>
+      <div class="shop-grid" id="shopGrid"></div>
+    </section>
+
+    <section class="panel tab-panel" id="notes" hidden>
+      <h2>注意事项</h2>
+      <div class="notice-grid" id="noticeGrid"></div>
+      <p class="footer-note">这份计划用于日常执行和复盘。医美术后、药物使用和皮肤异常反应，以医生医嘱和产品说明书优先。</p>
+    </section>
+  </main>
+
+  <script>
+    const startDate = new Date("2026-06-11T00:00:00");
+    const totalDays = 196;
+
+    const weekPlan = [
+      {
+        day: "周一",
+        title: "胸+三头",
+        gym: ["上斜卧推 4组", "平板卧推 4组", "器械夹胸 3组", "绳索下压 3组", "轻量卷腹 3组"],
+        home: ["俯卧撑 4组", "哑铃地板卧推 4组", "哑铃飞鸟 3组", "窄距俯卧撑 3组", "卷腹 3组"],
+        skincare: ["晚：洁面", "晚：SK-II", "晚：阿达帕林", "晚：CeraVe", "晚：米诺地尔"]
+      },
+      {
+        day: "周二",
+        title: "背+二头",
+        gym: ["高位下拉 4组", "坐姿划船 4组", "辅助引体向上 3组", "二头弯举 3组", "面拉 3组"],
+        home: ["弹力带下拉 4组", "单臂哑铃划船 4组", "反向划船 3组", "哑铃弯举 3组", "弹力带面拉 3组"],
+        skincare: ["晚：洁面", "晚：SK-II", "晚：双萃", "晚：CeraVe", "晚：米诺地尔"]
+      },
+      {
+        day: "周三",
+        title: "HIIT+核心轻量",
+        gym: ["跑步机/椭圆机/单车间歇 12-18分钟", "30秒快 + 60秒慢，循环8-10轮", "平板支撑 3组", "死虫 3组"],
+        home: ["开合跳或原地高抬腿 30秒", "登山跑 30秒", "休息60秒，循环8-10轮", "死虫 3组", "平板支撑 3组"],
+        skincare: ["晚：洁面", "第1月晚：SK-II", "晚：可复美面膜", "晚：CeraVe", "晚：米诺地尔", "第2月起：按阿达帕林频次调整"]
+      },
+      {
+        day: "周四",
+        title: "胸+腹肌强化",
+        gym: ["上斜哑铃卧推 4组", "坐姿推胸 4组", "绳索夹胸 3组", "悬垂举腿 3组", "绳索卷腹 3组"],
+        home: ["上斜俯卧撑 4组", "哑铃地板卧推 4组", "俯卧撑慢速离心 3组", "仰卧举腿 3组", "卷腹 3组"],
+        skincare: ["晚：洁面", "晚：SK-II", "晚：阿达帕林", "晚：CeraVe", "晚：米诺地尔"]
+      },
+      {
+        day: "周五",
+        title: "肩+核心",
+        gym: ["侧平举 5组", "后束飞鸟 5组", "哑铃推举 4组", "绳索面拉 3组", "平板支撑 3组"],
+        home: ["哑铃推举 4组", "侧平举 5组", "俯身飞鸟 5组", "弹力带面拉 3组", "死虫/卷腹/平板支撑"],
+        skincare: ["晚：洁面", "第1月晚：SK-II", "晚：双萃", "晚：CeraVe", "晚：米诺地尔", "第2月起：周五改阿达帕林"]
+      },
+      {
+        day: "周六",
+        title: "HIIT短间歇+金茉日",
+        gym: ["单车或椭圆机间歇 12-16分钟", "40秒中高强度 + 80秒轻松，循环6-8轮", "胸椎打开和肩部拉伸 10分钟"],
+        home: ["低冲击开合跳 30秒", "登山跑 30秒", "简化波比 20秒", "休息80秒，循环6-8轮", "拉伸 10分钟"],
+        skincare: ["晚：洁面", "晚：金茉AI当周水光弹", "晚：当周面膜", "晚：CeraVe", "晚：米诺地尔", "当天禁阿达帕林、双萃"]
+      },
+      {
+        day: "周日",
+        title: "恢复日",
+        gym: ["快走30分钟", "肩胸背拉伸 15分钟", "泡沫轴放松"],
+        home: ["散步30分钟", "全身拉伸20分钟", "睡眠和饮水复盘"],
+        skincare: ["晚：洁面", "晚：SK-II", "晚：补水面膜", "晚：CeraVe", "晚：米诺地尔", "第2月起双萃可放周日"]
+      }
+    ];
+
+    const months = [
+      {
+        title: "第1个月：消肿、耐受、习惯",
+        items: ["每周4次上肢力量 + 2次HIIT/快走恢复。", "阿达帕林低频，优先周一和周四；刺激明显降为每周1次。", "双萃周二、周五；金茉周六。", "米诺地尔稳定执行，不频繁更换产品。"]
+      },
+      {
+        title: "第2个月：提高节奏，光子①",
+        items: ["阿达帕林提高到周一、周三、周五。", "双萃改为周二、周日。", "第2个月第2周安排光子嫩肤①，推荐M22 AOPT嫩肤模式。", "光子后3天暂停阿达帕林、双萃、金茉、面膜，第4天恢复。"]
+      },
+      {
+        title: "第3个月：核心强化，光子②",
+        items: ["每次力量训练后增加10分钟核心。", "胸、肩、背动作开始记录重量或次数进步。", "第3个月末安排光子②。", "术后继续3天修护流程。"]
+      },
+      {
+        title: "第4个月：腰腹缩小，胸肩显形",
+        items: ["耐受良好时阿达帕林可考虑隔天一次；泛红干燥则退回每周3次。", "金茉继续每周一次。", "本月安排光子③。", "胸肩训练继续推动重量或次数进步。"]
+      },
+      {
+        title: "第5个月：稳定和减少刺激",
+        items: ["金茉按28周排期继续每周一次。", "面膜按当周金茉计划执行。", "训练保持，不额外增加复杂动作。", "重点稳定体脂下降和围度变化。"]
+      },
+      {
+        title: "第6个月：定型复盘",
+        items: ["继续防晒、阿达帕林、米诺地尔。", "维持上肢力量、核心和HIIT节奏。", "复盘体重、腰围、体脂、照片、肤色和发际线。", "根据结果决定下一阶段增肌或继续减脂。"]
+      }
+    ];
+
+    const jinmoPlan = [
+      { week: 1, phase: "建立耐受期", ampoule: "0号", mask: "1片", purpose: "补水、建立耐受" },
+      { week: 2, phase: "建立耐受期", ampoule: "5号", mask: "1片", purpose: "修护、维稳" },
+      { week: 3, phase: "建立耐受期", ampoule: "0号", mask: "1片", purpose: "再次补水缓冲" },
+      { week: 4, phase: "建立耐受期", ampoule: "4号", mask: "1片", purpose: "初步提亮、改善黄气" },
+      { week: 5, phase: "提亮修护启动期", ampoule: "3号", mask: "1片", purpose: "胶原、饱满、改善肤感" },
+      { week: 6, phase: "提亮修护启动期", ampoule: "5号", mask: "1片", purpose: "修护、抗炎" },
+      { week: 7, phase: "提亮修护启动期", ampoule: "4号", mask: "1片", purpose: "提亮、淡痘印" },
+      { week: 8, phase: "提亮修护启动期", ampoule: "0号", mask: "1片", purpose: "补水缓冲" },
+      { week: 9, phase: "提亮修护启动期", ampoule: "5号", mask: "1片", purpose: "屏障修护" },
+      { week: 10, phase: "提亮修护启动期", ampoule: "4号", mask: "1片", purpose: "强化祛黄" },
+      { week: 11, phase: "提亮修护启动期", ampoule: "3号", mask: "1片", purpose: "胶原支撑" },
+      { week: 12, phase: "提亮修护启动期", ampoule: "4号", mask: "1片", purpose: "提亮、肤色均匀" },
+      { week: 13, phase: "核心改善期", ampoule: "5号", mask: "1片", purpose: "修护稳定" },
+      { week: 14, phase: "核心改善期", ampoule: "4号", mask: "1片", purpose: "提亮淡印" },
+      { week: 15, phase: "核心改善期", ampoule: "0号", mask: "1片", purpose: "补水恢复" },
+      { week: 16, phase: "核心改善期", ampoule: "5号", mask: "1片", purpose: "抗炎、维稳" },
+      { week: 17, phase: "核心改善期", ampoule: "4号", mask: "1片", purpose: "改善暗沉" },
+      { week: 18, phase: "核心改善期", ampoule: "3号", mask: "1片", purpose: "饱满紧致" },
+      { week: 19, phase: "核心改善期", ampoule: "4号", mask: "1片", purpose: "强化提亮" },
+      { week: 20, phase: "核心改善期", ampoule: "5号", mask: "1片", purpose: "修护屏障" },
+      { week: 21, phase: "核心改善期", ampoule: "0号", mask: "1片", purpose: "补水缓冲" },
+      { week: 22, phase: "核心改善期", ampoule: "4号", mask: "1片", purpose: "提亮、淡痘印" },
+      { week: 23, phase: "巩固维持期", ampoule: "5号", mask: "1片", purpose: "修护抗老" },
+      { week: 24, phase: "巩固维持期", ampoule: "4号", mask: "1片", purpose: "提亮收尾" },
+      { week: 25, phase: "巩固维持期", ampoule: "3号", mask: "1片", purpose: "胶原饱满" },
+      { week: 26, phase: "巩固维持期", ampoule: "5号", mask: "1片", purpose: "稳定肤况" },
+      { week: 27, phase: "巩固维持期", ampoule: "4号", mask: "自备修护面膜", purpose: "巩固提亮" },
+      { week: 28, phase: "巩固维持期", ampoule: "0号", mask: "自备修护面膜", purpose: "补水收尾" }
+    ];
+
+    const shopping = [
+      { title: "已有", accent: "accent-sage", items: ["金茉AI", "SK-II 神仙水", "Olay 小白瓶", "双萃", "Swisse VC", "Swisse 葡萄籽"] },
+      { title: "必须补齐", accent: "accent-clay", items: ["理肤泉或同级通勤防晒 SPF50/PA++++", "CeraVe 修护保湿乳/霜", "阿达帕林凝胶", "米诺地尔", "可复美面膜", "鱼油", "维生素D3"] },
+      { title: "可选提升", accent: "accent-sky", items: ["温和洁面", "蛋白粉", "训练手套/助力带", "体脂秤或软尺"] },
+      { title: "周期消耗品", accent: "accent-amber", items: ["鸡蛋", "无糖酸奶", "牛肉、鱼肉、鸡胸", "香蕉", "猕猴桃", "黑咖啡", "低钠调味品"] }
+    ];
+
+    const notices = [
+      { title: "阿达帕林", items: ["晚间使用，豌豆大小薄涂。", "避开眼周、唇周和破损皮肤。", "干燥刺痛明显时降频，白天必须防晒。"] },
+      { title: "米诺地尔", items: ["按说明使用在头皮，不涂到面部。", "如有头皮刺激、胸闷、心悸、异常水肿，应暂停并咨询医生。", "坚持比频繁更换更重要。"] },
+      { title: "补剂", items: ["默认：VC 1片、葡萄籽1片、鱼油1粒、维生素D3 600-1000 IU/天。", "VC和葡萄籽放早餐后；鱼油放午餐或晚餐后；D3随早餐或午餐。", "不同产品规格可能不同，以瓶身标签优先；D3不要长期自行超过4000 IU/天。"] },
+      { title: "光子/水光/金茉", items: ["医美后3天修护优先。", "暂停阿达帕林、双萃、金茉和面膜。", "术后以医生医嘱为准，严格防晒。"] },
+      { title: "HIIT", items: ["每次控制在12-18分钟。", "避免连续两天高强度。", "若睡眠差、皮肤泛红或恢复差，当天改为坡走/快走。"] },
+      { title: "减脂和水肿", items: ["不要靠极端少喝水解决水肿。", "腰腹变化通常滞后，看4周平均体重、腰围和照片。", "高盐、饮酒、熬夜会明显影响晨起状态。"] }
+    ];
+
+    function dateToISO(date) {
+      const offset = date.getTimezoneOffset();
+      const local = new Date(date.getTime() - offset * 60000);
+      return local.toISOString().slice(0, 10);
+    }
+
+    function getPlanState(date) {
+      const oneDay = 24 * 60 * 60 * 1000;
+      const diff = Math.floor((date.setHours(0, 0, 0, 0) - startDate.getTime()) / oneDay);
+      const dayIndex = Math.max(0, Math.min(totalDays - 1, diff));
+      const monthIndex = Math.max(0, Math.min(5, Math.floor(dayIndex / (totalDays / 6))));
+      const weekIndex = Math.floor(dayIndex / 7) + 1;
+      const weekday = (new Date(date).getDay() + 6) % 7;
+      return { dayIndex, monthIndex, weekIndex, weekday, progress: Math.round(((dayIndex + 1) / totalDays) * 100) };
+    }
+
+    function getJinmoByWeek(week) {
+      return jinmoPlan[Math.max(0, Math.min(jinmoPlan.length - 1, week - 1))];
+    }
+
+    function renderList(target, items) {
+      target.innerHTML = items.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function renderToday(date) {
+      const state = getPlanState(new Date(date));
+      const dayPlan = weekPlan[state.weekday];
+      const jinmo = getJinmoByWeek(state.weekIndex);
+      const isJinmoDay = state.weekday === 5;
+      const skincare = isJinmoDay
+        ? ["晚：洁面", `晚：金茉AI：第${jinmo.week}周 ${jinmo.ampoule}`, `晚：${jinmo.mask}，${jinmo.purpose}`, "晚：CeraVe", "晚：米诺地尔", "当天禁阿达帕林、双萃"]
+        : dayPlan.skincare;
+
+      document.getElementById("todayTitle").textContent = `${dayPlan.day} · ${dayPlan.title}`;
+      document.getElementById("progressFill").style.width = `${state.progress}%`;
+      document.getElementById("progressText").textContent = `第${state.monthIndex + 1}个月 · 第${state.weekIndex}周 · 第${state.dayIndex + 1}/${totalDays}天`;
+      renderList(document.getElementById("todayQuickList"), [
+        `训练重点：${dayPlan.title}`,
+        `本周金茉：第${jinmo.week}周 ${jinmo.ampoule} / ${jinmo.purpose}`,
+        `阶段重点：${months[state.monthIndex].title.replace(/：.*/, "")}`
+      ]);
+      renderList(document.getElementById("dailyGym"), dayPlan.gym);
+      renderList(document.getElementById("dailyHome"), dayPlan.home);
+      renderList(document.getElementById("dailyJinmo"), [`第${jinmo.week}周`, `水光弹：${jinmo.ampoule}`, `面膜：${jinmo.mask}`, `目的：${jinmo.purpose}`]);
+      renderList(document.getElementById("dailySkincare"), skincare);
+
+      document.querySelectorAll(".day-card").forEach((card, index) => {
+        card.classList.toggle("today", index === state.weekday);
+      });
+      document.querySelectorAll(".month-card").forEach((card, index) => {
+        card.classList.toggle("active", index === state.monthIndex);
+      });
+      document.querySelectorAll(".jinmo-card").forEach((card, index) => {
+        card.classList.toggle("active", index + 1 === state.weekIndex);
+      });
+    }
+
+    function renderWeek() {
+      document.getElementById("weekGrid").innerHTML = weekPlan.map((day, index) => `
+        <article class="day-card" data-day="${index}">
+          <span class="pill">${day.day}</span>
+          <h3>${day.title}</h3>
+          <strong>能去健身房</strong>
+          <ul>${day.gym.map(item => `<li>${item}</li>`).join("")}</ul>
+          <strong>不能去健身房</strong>
+          <ul>${day.home.map(item => `<li>${item}</li>`).join("")}</ul>
+          <strong>晚护肤</strong>
+          <ul>${day.skincare.map(item => `<li>${item}</li>`).join("")}</ul>
+        </article>
+      `).join("");
+    }
+
+    function renderMonths() {
+      document.getElementById("monthGrid").innerHTML = months.map((month, index) => `
+        <article class="month-card accent-sage">
+          <span class="pill">Month ${index + 1}</span>
+          <h3>${month.title}</h3>
+          <ul>${month.items.map(item => `<li>${item}</li>`).join("")}</ul>
+        </article>
+      `).join("");
+    }
+
+    function renderJinmo() {
+      const phases = [...new Set(jinmoPlan.map(item => item.phase))];
+      document.getElementById("jinmoGrid").innerHTML = phases.map(phase => `
+        <h3>${phase}</h3>
+        <div class="jinmo-grid">
+          ${jinmoPlan.filter(item => item.phase === phase).map(item => `
+            <article class="jinmo-card accent-clay" data-week="${item.week}">
+              <span class="pill">第${item.week}周</span>
+              <h3>${item.ampoule}</h3>
+              <ul>
+                <li>面膜：${item.mask}</li>
+                <li>目的：${item.purpose}</li>
+              </ul>
+            </article>
+          `).join("")}
+        </div>
+      `).join("");
+    }
+
+    function renderShopping() {
+      document.getElementById("shopGrid").innerHTML = shopping.map(group => `
+        <article class="shop-card ${group.accent}">
+          <h3>${group.title}</h3>
+          <ul>${group.items.map(item => `<li>${item}</li>`).join("")}</ul>
+        </article>
+      `).join("");
+    }
+
+    function renderNotices() {
+      document.getElementById("noticeGrid").innerHTML = notices.map(group => `
+        <article class="notice-card accent-rose">
+          <h3>${group.title}</h3>
+          <ul>${group.items.map(item => `<li>${item}</li>`).join("")}</ul>
+        </article>
+      `).join("");
+    }
+
+    function setupTabs() {
+      document.querySelectorAll(".tab-button").forEach(button => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(".tab-button").forEach(item => item.classList.remove("active"));
+          document.querySelectorAll(".tab-panel").forEach(panel => panel.hidden = true);
+          button.classList.add("active");
+          document.getElementById(button.dataset.tab).hidden = false;
+        });
+      });
+    }
+
+    renderWeek();
+    renderMonths();
+    renderJinmo();
+    renderShopping();
+    renderNotices();
+    setupTabs();
+
+    const picker = document.getElementById("datePicker");
+    picker.value = dateToISO(new Date());
+    picker.addEventListener("change", event => renderToday(new Date(event.target.value + "T00:00:00")));
+    renderToday(new Date(picker.value + "T00:00:00"));
+  </script>
+</body>
+</html>
