@@ -7,7 +7,8 @@
 - `index.html`：最新版入口，手机日常只打开这个。
 - `manifest.webmanifest`：PWA 元信息。
 - `service-worker.js`：缓存最新版页面，便于弱网时打开最近版本。
-- `versions/2026-06-13/index.html`：本次历史版本。
+- `versions/2026-06-13/index.html`：初始历史版本。
+- `versions/2026-06-14/index.html`：身体护理与身体美白购买清单版本。
 - `CHANGELOG.md`：版本更新记录。
 
 ## 免费发布建议

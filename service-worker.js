@@ -1,9 +1,9 @@
-const CACHE_NAME = "fitness-skin-plan-v2026-06-13";
+const CACHE_NAME = "fitness-skin-plan-v2026-06-14";
 const PRECACHE_URLS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./versions/2026-06-13/index.html"
+  "./versions/2026-06-14/index.html"
 ];
 
 self.addEventListener("install", event => {
